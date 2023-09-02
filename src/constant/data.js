@@ -13,6 +13,33 @@ export const menuItems = [
     icon: "heroicons-outline:home",
     link: "home",
   },
+  {
+    title: "Dashboardasdas",
+    icon: "heroicons-outline:home",
+    link: "home",
+    child: [
+      {
+        childtitle: "Calendar",
+        childlink: "calender",
+        childicon: "heroicons-outline:calendar",
+      },
+      {
+        childtitle: "Kanban",
+        childlink: "kanban",
+        childicon: "heroicons-outline:view-boards",
+      },
+      {
+        childtitle: "Todo",
+        childlink: "todo",
+        childicon: "heroicons-outline:clipboard-check",
+      },
+      {
+        childtitle: "Projects",
+        childlink: "projects",
+        childicon: "heroicons-outline:document",
+      },
+    ],
+  },
 ];
 // menuseetins
 

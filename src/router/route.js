@@ -10,6 +10,11 @@ const routes = [
         name: "home",
         component: () => import("@/views/index.vue"),
       },
+      {
+        path: "/calender",
+        name: "calender",
+        component: () => import("@/views/index.vue"),
+      },
     ],
   },
 ];

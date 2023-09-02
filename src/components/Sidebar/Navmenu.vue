@@ -9,29 +9,25 @@
             <!-- ?? single menu with no childred !!  -->
 
             <router-link
-                :to="`${item.link}`"
+                :to="item.link"
                 class="menu-link"
-                v-if="!item.child && !item.isHeadr"
+                v-if="isNotChildAndNotHeader(item)"
             >
                 <span class="menu-icon" v-if="item.icon">
-                    <Icon :icon="item.icon"
-                /></span>
+                    <Icon :icon="item.icon" />
+                </span>
                 <div class="text-box" v-if="item.title">{{ item.title }}</div>
             </router-link>
 
             <!-- ?? only for menulabel ??  -->
-            <div v-else-if="item.isHeadr && !item.child" class="menulabel">
+            <div v-else-if="isHeaderWithoutChild(item)" class="menulabel">
                 {{ item.title }}
             </div>
             <!-- !!sub menu parent li !! -->
             <div
                 class="menu-link"
                 v-else
-                :class="
-                    activeSubmenu === i
-                        ? 'parent_active not-collapsed'
-                        : 'collapsed'
-                "
+                :class="submenuActiveClass(i)"
                 @click="toggleSubmenu(i)"
             >
                 <div class="flex-1 flex items-start">
@@ -45,11 +41,7 @@
                 <div class="flex-0">
                     <div
                         class="menu-arrow transform transition-all duration-300"
-                        :class="
-                            activeSubmenu === i
-                                ? ' ltr:rotate-90 rtl:rotate-90'
-                                : 'rtl:rotate-180'
-                        "
+                        :class="submenuActiveClass(i)"
                     >
                         <Icon icon="heroicons-outline:chevron-right" />
                     </div>
@@ -75,19 +67,11 @@
                         <router-link :to="ci.childlink" v-slot="{ isActive }">
                             <span
                                 class="text-sm flex space-x-3 rtl:space-x-reverse items-center transition-all duration-150"
-                                :class="
-                                    isActive
-                                        ? ' text-slate-900 dark:text-white font-medium'
-                                        : 'text-slate-600 dark:text-slate-300'
-                                "
+                                :class="getClassIfChildIsActive(isActive, 'dark:text-white font-medium', 'text-slate-600 dark:text-slate-300')"
                             >
                                 <span
                                     class="h-2 w-2 rounded-full border border-slate-600 dark:border-slate-300 inline-block flex-none"
-                                    :class="
-                                        isActive
-                                            ? ' bg-slate-900 dark:bg-slate-300 ring-4 ring-opacity-[15%] ring-black-500 dark:ring-slate-300 dark:ring-opacity-20'
-                                            : ''
-                                    "
+                                    :class=" getClassIfChildIsActive(isActive, 'bg-slate-900 dark:bg-slate-300 ring-4 ring-opacity-[15%] ring-black-500 dark:ring-slate-300 dark:ring-opacity-20', '')"
                                 ></span>
                                 <span class="flex-1">
                                     {{ ci.childtitle }}
@@ -143,9 +127,22 @@ export default {
         childrenLinks: { type: Array, default: null },
     },
 
-	computed: {},
+	computed: {
+        },
 
     methods: {
+        submenuActiveClass(i) {
+            return this. activeSubmenu === i ? 'parent_active not-collapsed' : 'collapsed'
+        },
+        isNotChildAndNotHeader(item) {
+            return !item?.child && !item?.isHeadr;
+        },
+        isHeaderWithoutChild(item) {
+            return item?.isHeadr && !item?.child;
+        },
+        getClassIfChildIsActive(isActive, activeClass, nonActiveClass) {
+            return isActive ? activeClass : nonActiveClass
+        },
         beforeEnter(element) {
             requestAnimationFrame(() => {
                 if (!element.style.height) {
@@ -190,13 +187,13 @@ export default {
             }
         },
 		isHasSubMenu(item) {
-			return item.child ? 'item-has-children' : '';
+			return item?.child ? 'item-has-children' : '';
 		},
 		isActiveMenu(i) {
 			return this.activeSubmenu === i ? 'open' : '';
 		},
 		isMenuActive(item) {
-			return this.$route.name === item.link ? 'menu-item-active' : '';
+			return this.$route.name === item?.link ? 'menu-item-active' : '';
 		},
     },
 

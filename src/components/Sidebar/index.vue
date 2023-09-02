@@ -1,41 +1,18 @@
 <template>
   <div :class="this.$store.themeSettingsStore.semidark ? 'dark' : ''">
     <div
-      :class="`sidebar-wrapper bg-white dark:bg-slate-800    ${
-        this.$store.themeSettingsStore.skin === 'bordered'
-          ? 'border-r border-gray-5002 dark:border-slate-700'
-          : 'shadow-base'
-      }   ${
-        this.$store.themeSettingsStore.sidebarCollasp
-          ? this.closeClass
-          : this.openClass
-      }
-      ${this.$store.themeSettingsStore.isMouseHovered ? 'sidebar-hovered' : ''}
-      
-      `"
+			:class="`sidebar-wrapper bg-white dark:bg-slate-800 ${sidebarIsBordered} ${siebarIsCollaps} ${sideBarIsHovered}`"
       @mouseenter="this.$store.themeSettingsStore.isMouseHovered = true"
       @mouseleave="this.$store.themeSettingsStore.isMouseHovered = false"
     >
       <div
-        :class="`logo-segment flex justify-between items-center bg-white dark:bg-slate-800 z-[9] py-6  sticky top-0   px-4  ${
-          this.$store.themeSettingsStore.sidebarCollasp
-            ? this.closeClass
-            : this.openClass
-        } ${
-          this.$store.themeSettingsStore.skin === 'bordered'
-            ? ' border-b border-r border-gray-5002 dark:border-slate-700'
-            : ' border-none'
-        }
-        ${this.$store.themeSettingsStore.isMouseHovered ? 'logo-hovered' : ''}
-        
-        `"
+        :class="`
+					logo-wrapper ${siebarIsCollaps} ${isLogoWrapperWhen} ${themeSkinIsHovered ? 'logo-hovered' : ''}
+				`"
       >
         <router-link
           :to="{ name: 'home' }"
-          v-if="
-            !this.$store.themeSettingsStore.sidebarCollasp ||
-            this.$store.themeSettingsStore.isMouseHovered
-          "
+          v-if="isSidebarOpenOrMouseHovered"
         >
           <img
             src="@/assets/images/logo/logo.svg"
@@ -57,10 +34,7 @@
         </router-link>
         <router-link
           :to="{ name: 'home' }"
-          v-if="
-            this.$store.themeSettingsStore.sidebarCollasp &&
-            !this.$store.themeSettingsStore.isMouseHovered
-          "
+          v-if="isSidebarCollapsedAndNotHovered"
         >
           <img
             src="@/assets/images/logo/logo-c.svg"
@@ -81,9 +55,7 @@
         </router-link>
         <span
           class="cursor-pointer text-slate-900 dark:text-white text-2xl"
-          v-if="
-            !this.$store.themeSettingsStore.sidebarCollasp ||
-            this.$store.themeSettingsStore.isMouseHovered
+          v-if="isSidebarOpenOrMouseHovered
           "
           @click="
             this.$store.themeSettingsStore.sidebarCollasp =
@@ -143,6 +115,42 @@ export default defineComponent({
     };
   },
 
+  computed: {
+		sidebarIsCollasp() {
+			return this.$store.themeSettingsStore.sidebarCollasp;
+		},
+		themeSkinIsBordered() {
+			return this.$store.themeSettingsStore.skin === 'bordered';
+		},
+		siebarIsCollaps() {
+			return this.sidebarIsCollasp ? this.closeClass : this.openClass;
+		},
+		themeSkinIsHovered() {
+			return this.$store.themeSettingsStore.isMouseHovered;
+		},
+		borderedClass() {
+			return 'border-r border-gray-5002 dark:border-slate-700';
+		},
+		sidebarIsBordered() {
+			const isBordered = this.themeSkinIsBordered;
+			const borderedClass = this.borderedClass;
+			
+			return isBordered ? borderedClass : 'shadow-base'
+		},
+		sideBarIsHovered() {
+			return this.themeSkinIsHovered ? 'sidebar-hovered' : ''
+		},
+		isSidebarOpenOrMouseHovered() {
+			return !this.sidebarIsCollasp || this.themeSkinIsHovered
+		},
+		isSidebarCollapsedAndNotHovered() {
+			return this.sidebarIsCollasp && !this.themeSkinIsHovered
+		},
+		isLogoWrapperWhen() {
+			return this.themeSkinIsBordered ? `border-b ${this.borderedClass}` : ' border-none'
+		},
+	},
+
   setup() {
     const shadowbase = ref(false);
     const simplebarInstance = ref(null);
@@ -171,33 +179,41 @@ export default defineComponent({
 </script>
 <style lang="scss">
 .sidebar-wrapper {
-  @apply fixed ltr:left-0 rtl:right-0 top-0   h-screen   z-[999];
-  transition: width 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
-  will-change: width;
+	@apply fixed ltr:left-0 rtl:right-0 top-0   h-screen   z-[999];
+	transition: width 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+	will-change: width;
+
+	.logo-wrapper {
+		@apply logo-segment h-[80px] flex justify-between items-center bg-white dark:bg-slate-800 z-[9] py-6  sticky top-0   px-4;
+	}
 }
 
 .nav-shadow {
-  background: linear-gradient(
-    rgb(255, 255, 255) 5%,
-    rgba(255, 255, 255, 75%) 45%,
-    rgba(255, 255, 255, 20%) 80%,
-    transparent
-  );
+	background: linear-gradient(
+		rgb(255, 255, 255) 5%,
+		rgba(255, 255, 255, 75%) 45%,
+		rgba(255, 255, 255, 20%) 80%,
+		transparent
+	);
 }
 .dark {
-  .nav-shadow {
-    background: linear-gradient(
-      rgba(#1e293b, 100%) 5%,
-      rgba(#1e293b, 75%) 45%,
-      rgba(#1e293b, 20%) 80%,
-      transparent
-    );
-  }
+	.nav-shadow {
+		background: linear-gradient(
+			rgba(#1e293b, 100%) 5%,
+			rgba(#1e293b, 75%) 45%,
+			rgba(#1e293b, 20%) 80%,
+			transparent
+		);
+	}
 }
 .sidebar-wrapper.sidebar-hovered {
-  width: 248px !important;
+	width: 248px !important;
 }
 .logo-segment.logo-hovered {
-  width: 248px !important;
+	width: 248px !important;
+}
+
+.ring-active {
+	@apply ring-2 ring-inset ring-offset-4 ring-black-900 dark:ring-slate-400 bg-slate-900 dark:bg-slate-400 dark:ring-offset-slate-700;
 }
 </style>
