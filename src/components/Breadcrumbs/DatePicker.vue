@@ -39,7 +39,7 @@
 <script setup>
 import { computed, ref } from "vue";
 import VueTailwindDatePicker from "vue-tailwind-datepicker";
-import Icon from '@/components/icon'
+import Icon from '@/components/Icon'
 const dateValue = ref({
     startDate: '',
     endDate: '',
