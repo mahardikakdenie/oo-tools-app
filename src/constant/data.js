@@ -6,17 +6,39 @@ import user4Img from "@/assets/images/all-img/user4.png";
 export const menuItems = [
   {
     isHeadr: true,
-    title: "menu",
+    title: "Admin Dashboard",
   },
   {
     title: "Dashboard",
     icon: "heroicons-outline:home",
-    link: "home",
+    isOpen: true,
+    child: [
+      {
+        childtitle: "Analytics Dashboard",
+        childlink: "home",
+      },
+      {
+        childtitle: "Ecommerce Dashboard",
+        childlink: "ecommerce",
+      },
+      {
+        childtitle: "Project  Dashbaord",
+        childlink: "project",
+      },
+      {
+        childtitle: " CRM Dashbaord",
+        childlink: "crm",
+      },
+      {
+        childtitle: "Banking Dashboard",
+        childlink: "banking",
+      },
+    ],
   },
   {
     title: "Dashboardasdas",
     icon: "heroicons-outline:home",
-    link: "home",
+    link: "/calender",
     child: [
       {
         childtitle: "Calendar",

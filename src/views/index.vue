@@ -1,7 +1,7 @@
 <template>
-	<Card title="Tabs">
-		<span>Views</span>
-	</Card>
+	<div>
+		<router-view />
+	</div>
 </template>
 
 <script setup>

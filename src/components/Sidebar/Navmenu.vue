@@ -3,7 +3,7 @@
         <li
             v-for="(item, i) in items"
             :key="i"
-            :class="`${isHasSubMenu(menu)} ${isActiveMenu(i)} ${isMenuActive(menu)}`"
+            :class="`${isHasSubMenu(item)} ${isActiveMenu(i)} ${isMenuActive(item)}`"
             class="single-sidebar-menu"
         >
             <!-- ?? single menu with no childred !!  -->
@@ -64,14 +64,14 @@
                         :key="index"
                         class="block ltr:pl-4 rtl:pr-4 ltr:pr-1 rtl:-l-1 mb-4 first:mt-4"
                     >
-                        <router-link :to="ci.childlink" v-slot="{ isActive }">
+                        <router-link :to="ci.childlink">
                             <span
                                 class="text-sm flex space-x-3 rtl:space-x-reverse items-center transition-all duration-150"
-                                :class="getClassIfChildIsActive(isActive, 'dark:text-white font-medium', 'text-slate-600 dark:text-slate-300')"
+                                :class="getClassIfChildIsActive(ci.childlink, 'dark:text-white font-medium', 'text-slate-600 dark:text-slate-300')"
                             >
                                 <span
                                     class="h-2 w-2 rounded-full border border-slate-600 dark:border-slate-300 inline-block flex-none"
-                                    :class=" getClassIfChildIsActive(isActive, 'bg-slate-900 dark:bg-slate-300 ring-4 ring-opacity-[15%] ring-black-500 dark:ring-slate-300 dark:ring-opacity-20', '')"
+                                    :class=" getClassIfChildIsActive(ci.childlink, 'bg-slate-900 dark:bg-slate-300 ring-4 ring-opacity-[15%] ring-black-500 dark:ring-slate-300 dark:ring-opacity-20', '')"
                                 ></span>
                                 <span class="flex-1">
                                     {{ ci.childtitle }}
@@ -140,7 +140,8 @@ export default {
         isHeaderWithoutChild(item) {
             return item?.isHeadr && !item?.child;
         },
-        getClassIfChildIsActive(isActive, activeClass, nonActiveClass) {
+        getClassIfChildIsActive(route, activeClass, nonActiveClass) {
+            const isActive = this.$route.path.includes(route);
             return isActive ? activeClass : nonActiveClass
         },
         beforeEnter(element) {
