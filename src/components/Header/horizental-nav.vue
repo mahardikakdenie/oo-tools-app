@@ -1,5 +1,5 @@
 <template>
-  <div class="main-menu">
+  <div class="main-menu w-[100%]">
     <DesktopMenu />
   </div>
 </template>

@@ -101,7 +101,7 @@
   </ul>
 </template>
 <script>
-import { topMenu } from "../../../constant/data.js";
+import { menuItems } from "../../../constant/data.js";
 import Icon from "../../Icon";
 export default {
   components: {
@@ -109,13 +109,13 @@ export default {
   },
   data() {
     return {
-      topMenu,
+      menuItems,
     };
   },
 
   computed: {
     newMenulist: function () {
-      return this.topMenu.filter(function (item) {
+      return this.menuItems.filter(function (item) {
         return Boolean(!item.isHeadr);
       });
     },

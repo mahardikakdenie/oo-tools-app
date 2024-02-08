@@ -1,16 +1,28 @@
 <template>
   <router-link :to="{ name: 'home' }">
     <img
-      src="@/assets/images/logo/logo.svg"
+      :src="logo"
       alt=""
       v-if="!this.$store.themeSettingsStore.isDark"
     />
 
     <img
-      src="@/assets/images/logo/logo-white.svg"
+      :src="logo_white"
       alt=""
       v-if="this.$store.themeSettingsStore.isDark"
     />
   </router-link>
 </template>
-<script></script>
+
+<script setup>
+const props = defineProps({
+  logo: {
+    type: String,
+    default: '/logo/logo.svg',
+  },
+  logo_white: {
+    type: String,
+    default: '/logo/logo-white.svg',
+  }
+})
+</script>

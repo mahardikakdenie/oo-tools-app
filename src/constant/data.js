@@ -10,57 +10,8 @@ export const menuItems = [
   },
   {
     title: "Dashboard",
-    icon: "heroicons-outline:home",
-    isOpen: true,
-    child: [
-      {
-        childtitle: "Analytics Dashboard",
-        childlink: "home",
-      },
-      {
-        childtitle: "Ecommerce Dashboard",
-        childlink: "ecommerce",
-      },
-      {
-        childtitle: "Project  Dashbaord",
-        childlink: "project",
-      },
-      {
-        childtitle: " CRM Dashbaord",
-        childlink: "crm",
-      },
-      {
-        childtitle: "Banking Dashboard",
-        childlink: "banking",
-      },
-    ],
-  },
-  {
-    title: "Dashboardasdas",
-    icon: "heroicons-outline:home",
-    link: "/calender",
-    child: [
-      {
-        childtitle: "Calendar",
-        childlink: "calender",
-        childicon: "heroicons-outline:calendar",
-      },
-      {
-        childtitle: "Kanban",
-        childlink: "kanban",
-        childicon: "heroicons-outline:view-boards",
-      },
-      {
-        childtitle: "Todo",
-        childlink: "todo",
-        childicon: "heroicons-outline:clipboard-check",
-      },
-      {
-        childtitle: "Projects",
-        childlink: "projects",
-        childicon: "heroicons-outline:document",
-      },
-    ],
+    // icon: "heroicons-outline:home",
+    link: "home",
   },
 ];
 // menuseetins
@@ -207,28 +158,6 @@ export const topMenu = [
     title: "Dashboard",
     icon: "heroicons-outline:home",
     link: "home",
-    child: [
-      {
-        childtitle: "Calendar",
-        childlink: "calender",
-        childicon: "heroicons-outline:calendar",
-      },
-      {
-        childtitle: "Kanban",
-        childlink: "kanban",
-        childicon: "heroicons-outline:view-boards",
-      },
-      {
-        childtitle: "Todo",
-        childlink: "todo",
-        childicon: "heroicons-outline:clipboard-check",
-      },
-      {
-        childtitle: "Projects",
-        childlink: "projects",
-        childicon: "heroicons-outline:document",
-      },
-    ],
   },
 ];
 
