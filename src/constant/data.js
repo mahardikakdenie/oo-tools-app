@@ -6,12 +6,22 @@ import user4Img from "@/assets/images/all-img/user4.png";
 export const menuItems = [
   {
     isHeadr: true,
-    title: "Admin Dashboard",
+    title: "Admin Dashboard Tools",
   },
   {
-    title: "Dashboard",
-    // icon: "heroicons-outline:home",
-    link: "home",
+    title: "System Logs",
+    icon: "tdesign:backup",
+    link: "system-log",
+  },
+  {
+    title: "Exchange Resi",
+    icon: "basil:exchange-solid",
+    link: "exchange-receipt-number",
+  },
+  {
+    title: "Submission",
+    icon: "fluent-mdl2:activate-orders",
+    link: "submission",
   },
 ];
 // menuseetins

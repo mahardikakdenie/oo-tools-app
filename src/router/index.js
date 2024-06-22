@@ -17,7 +17,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (!to.name) {
     next({
-      path: '/admin/home'
+      path: '/system-log'
     });
   }
   const titleText = to?.name;

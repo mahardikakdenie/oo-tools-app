@@ -2,20 +2,28 @@ const router = [
     {
         name: "home",
         path: "home",
-        component: () => import("@/views/home/index.vue"),
+        component: () => import("@/views/home/crm.vue"),
         meta: {
             groupParents: 'Home Dashboard'
         },
     },
     {
-        name: 'CRM Dashboard',
-        path: 'crm',
-        component: () => import('@/views/home/crm.vue'),
+        name: 'System Log',
+        path: 'system-log',
+        component: () => import('@/views/system-logs.vue'),
+        meta: {
+            groupParents: 'Home Dashboard'
+        },
     },
     {
-        name: 'Ecommerce Dashboard',
-        path: 'ecommerce',
-        component: () => import('@/views/home/ecommerce.vue'),
+        name: 'Exchange Receipt Number',
+        path: 'exchange-receipt-number',
+        component: () => import('@/views/exchange-receipt-number.vue'),
+    },
+    {
+        name: 'Submision Dashboard',
+        path: 'submission',
+        component: () => import('@/views/submission.vue'),
     },
     {
         name: 'Bangking Dashboard',
@@ -29,6 +37,14 @@ const router = [
         meta: {
             groupParent: 'Home Dashboard'
         },
+    },
+    {
+        name: 'Submission',
+        path: '/submission',
+        component: () => import('@/views/submission.vue'),
+        meta: {
+            groupParent: 'Submission',
+        }
     },
 ];
 

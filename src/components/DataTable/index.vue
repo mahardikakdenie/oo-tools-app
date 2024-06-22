@@ -11,7 +11,14 @@
 					prependIcon="heroicons-outline:search"
 					merged />
 			</div>
-
+			<div class="flex my-4 gap-2">
+				<div class="w-1/5">
+					<vue-select placeholder="Types" />
+				</div>
+				<div class="w-1/5">
+					<vue-select placeholder="Status Logs" />
+				</div>
+			</div>
 			<vue-good-table
 				:columns="columns"
 				styleClass="vgt-table bordered centered"
@@ -125,8 +132,10 @@ import Card from '@/components/Card';
 import Icon from '@/components/Icon';
 import InputGroup from '@/components/InputGroup';
 import Pagination from '@/components/Pagination';
+import VueButton from '@/components/Button';
 import { MenuItem } from '@headlessui/vue';
 import { advancedTable } from '@/constant/basic-tablle-data';
+import VueSelect from '@/components/Select/VueSelect.vue';
 const actions = [
 	{
 		name: 'view',
@@ -199,7 +208,9 @@ export default {
 		Dropdown,
 		Icon,
 		Card,
+		VueButton,
 		MenuItem,
+		VueSelect,
 	},
 
 	props: {

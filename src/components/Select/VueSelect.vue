@@ -18,6 +18,7 @@
           :name="name"
           :error="error"
           :id="name"
+          :placeholder="placeholder"
           :readonly="isReadonly"
           :disabled="disabled"
           :validate="validate"

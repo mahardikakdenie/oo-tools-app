@@ -18,11 +18,11 @@
 const props = defineProps({
   logo: {
     type: String,
-    default: '/logo/logo.svg',
+    default: '/logo/orderonline.svg',
   },
   logo_white: {
     type: String,
-    default: '/logo/logo-white.svg',
+    default: '/logo/orderonline.svg',
   }
 })
 </script>
