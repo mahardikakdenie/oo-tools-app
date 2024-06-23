@@ -8,7 +8,7 @@ const router = [
         },
     },
     {
-        name: 'System Log',
+        name: 'SystemLog',
         path: 'system-log',
         component: () => import('@/views/system-logs.vue'),
         meta: {
