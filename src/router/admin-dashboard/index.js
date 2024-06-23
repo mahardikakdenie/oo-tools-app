@@ -16,12 +16,12 @@ const router = [
         },
     },
     {
-        name: 'Exchange Receipt Number',
+        name: 'ExchangeReceiptNumber',
         path: 'exchange-receipt-number',
         component: () => import('@/views/exchange-receipt-number.vue'),
     },
     {
-        name: 'Submision Dashboard',
+        name: 'SubmisionDashboard',
         path: 'submission',
         component: () => import('@/views/submission.vue'),
     },
