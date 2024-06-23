@@ -1,17 +1,6 @@
 <template>
 <div class="flex justify-between flex-wrap items-center">
 	<div class="b-section">
-		<h4
-			v-if="!groupParent"
-			:class="[
-				{
-					groupParent: 'lg:border-r lg:border-secondary-500',
-				},
-			]"
-			class="font-medium lg:text-2xl text-xl capitalize text-slate-900 inline-block ltr:pr-4 rtl:pl-4"
-		>
-			{{ sectionName }}
-		</h4>
 		<group
 			v-if="groupParent"
 			:groupParent="groupParent"

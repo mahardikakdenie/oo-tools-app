@@ -1,4 +1,4 @@
-export const status = [
+export const systemLogStatuses = [
     {
         label: 'Success',
         key: 'success',
@@ -7,6 +7,10 @@ export const status = [
         label: 'Failed',
         key: 'failed',
     },
+    {
+        label: 'Info',
+        key: 'info',
+    }
 ];
 
 export const types = [

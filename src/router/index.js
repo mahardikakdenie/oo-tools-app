@@ -20,6 +20,15 @@ router.beforeEach((to, from, next) => {
       path: '/system-log'
     });
   }
+
+  if (to.name === 'Login') {
+    const currentToken = localStorage.getItem('token');
+    if (currentToken) {
+      next({
+        path: '/system-log'
+      });
+    }
+  }
   const titleText = to?.name;
   const words = titleText?.split(" ");
   const wordslength = words?.length;

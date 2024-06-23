@@ -24,6 +24,7 @@
           :validate="validate"
           :multiple="multiple"
           :options="options"
+          @change="$emit('change')"
         >
         </vSelect>
       </div>

@@ -13,16 +13,16 @@
 			</div>
 			<div class="flex my-4 gap-2">
 				<div class="w-1/5">
-					<vue-select placeholder="Types" />
+					<vue-select placeholder="Types" :options="systemLogsTypes" @change="onChanges" />
 				</div>
 				<div class="w-1/5">
-					<vue-select placeholder="Status Logs" />
+					<vue-select placeholder="Status Logs" :options="systemLogStatuses" @change="onChanges" />
 				</div>
 			</div>
 			<vue-good-table
-				:columns="columns"
+				:columns="headers"
 				styleClass="vgt-table bordered centered"
-				:rows="advancedTable"
+				:rows="datas"
 				:pagination-options="{
 					enabled: true,
 					perPage: perpage,
@@ -68,15 +68,20 @@
 						<span
 							class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25"
 							:class="`${
-								props.row.status === 'paid'
+								props.row.status === 'success'
 									? 'text-success-500 bg-success-500'
 									: ''
 							} 
-			${props.row.status === 'due' ? 'text-warning-500 bg-warning-500' : ''}
-			${props.row.status === 'cancled' ? 'text-danger-500 bg-danger-500' : ''}
+			${props.row.status === 'failed' ? 'text-warning-500 bg-warning-500' : ''}
+			${props.row.status === 'info' ? 'text-primary-500 bg-primary-500' : ''}
 			
 			`">
 							{{ props.row.status }}
+						</span>
+					</span>
+					<span v-if="props.column.field === 'created_at'">
+						<span>
+							{{  setDate(props.row.created_at)  }}
 						</span>
 					</span>
 					<span v-if="props.column.field == 'action'">
@@ -108,7 +113,7 @@
 				<template #pagination-bottom="props">
 					<div class="py-4 px-3">
 						<Pagination
-							:total="50"
+							:total="10"
 							:current="current"
 							:per-page="perpage"
 							:pageRange="pageRange"
@@ -135,7 +140,9 @@ import Pagination from '@/components/Pagination';
 import VueButton from '@/components/Button';
 import { MenuItem } from '@headlessui/vue';
 import { advancedTable } from '@/constant/basic-tablle-data';
-import VueSelect from '@/components/Select/VueSelect.vue';
+import VueSelect from '@/components/Select/index.vue';
+import dayjs from 'dayjs';
+import { systemLogStatuses, types } from '@/constant/system-logs';
 const actions = [
 	{
 		name: 'view',
@@ -218,6 +225,18 @@ export default {
 			type: String,
 			default: () => '',
 		},
+		headers: {
+			type: Array,
+			required: true,
+		},
+		datas: {
+			type: Array,
+			required: true,
+		},
+		totalPage: {
+			type: Number,
+			default: 10,
+		}
 	},
 
 	data() {
@@ -230,8 +249,18 @@ export default {
 			actions,
 			options,
 			columns,
+			systemLogStatuses: systemLogStatuses,
+			systemLogsTypes: types,
 		};
 	},
+	methods: {
+		setDate(date) {
+			return dayjs(date).format('YYYY MMMM DD')
+		},
+		onChanges(value) {
+			console.log("🚀 ~ onChanges ~ value:", value?.target?.value)
+		},
+	}
 };
 </script>
 <style lang="scss"></style>

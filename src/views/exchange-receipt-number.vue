@@ -1,6 +1,6 @@
 <template>
     <div>
-        <DataTable />
+        <DataTable :headers="[]" :datas="[]" />
     </div>
 </template>
 
