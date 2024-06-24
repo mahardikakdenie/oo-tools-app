@@ -42,7 +42,7 @@ const fetchParams = computed(() => {
 const getData = () => {
     const params = fetchParams?.value;
     const callback = (res) => {
-        systemLogs.value = res?.data?.data?.docs;
+        systemLogs.value = res?.data?.data;
     };
     const err = () => console.log(e);
     
