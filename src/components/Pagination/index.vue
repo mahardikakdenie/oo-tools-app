@@ -26,7 +26,7 @@
       <div class="flex items-center" v-if="enableSearch && enableSelect">
         <Select
           v-model.number="input2"
-          @change="changePage(input2)"
+          @change="changeLimit(input2)"
           placeholder="Go"
           classInput=" w-[60px] h-9 "
           :options="options"
@@ -201,6 +201,9 @@ export default defineComponent({
       if (this.pageChanged) {
         this.pageChanged({ currentPage: page });
       }
+    },
+    changeLimit(limit) {
+      this.$emit('change-limit', limit);
     },
     customPerPageChange(page) {
       this.perPageChanged({ currentPerPage: page });

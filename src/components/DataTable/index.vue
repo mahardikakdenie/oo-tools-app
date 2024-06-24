@@ -122,7 +122,8 @@
 							:perPageChanged="props.perPageChanged"
 							enableSearch
 							enableSelect
-							:options="options">
+							:options="options" 
+							@change-limit="changeLimit">
 							>
 						</Pagination>
 					</div>
@@ -259,6 +260,9 @@ export default {
 		},
 		onChanges(value) {
 			console.log("🚀 ~ onChanges ~ value:", value?.target?.value)
+		},
+		changeLimit(limit) {
+			console.log('limit -> ', limit)
 		},
 	}
 };
