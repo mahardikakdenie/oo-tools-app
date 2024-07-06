@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const endpoint = 'http://localhost:8081/auth/login/'
-const endpoint = 'https://node-tools-api-production.up.railway.app/auth/login/'
+const endpoint = `${import.meta.env.VITE_API_URL}/auth/login/`
 export const login = (params, callback, errCb) => {
     axios.post(endpoint, params)
         .then(res => {

@@ -74,8 +74,7 @@ const submit = () => {
 
     const callback = (res) => {
         console.log(res);
-        if (res?.data?.status === 200) {
-            alert.value = 'Your Credential is not found in our record';
+        if (res?.data?.meta?.status) {
             localStorage.setItem('token', res?.data?.data);
             router?.push('/system-log');
         }

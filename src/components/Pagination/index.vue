@@ -154,6 +154,10 @@ export default defineComponent({
       type: Number,
       default: 2,
     },
+    totalPages: {
+      type: Number,
+      default: 2,
+    },
     textBeforeInput: {
       type: String,
       default: "Go to page",
@@ -229,9 +233,9 @@ export default defineComponent({
 
       return end < this.totalPages ? end : this.totalPages;
     },
-    totalPages: function () {
-      return Math.ceil(this.total / this.perPage);
-    },
+    // totalPages: function () {
+    //   return Math.ceil(this.total / this.perPage);
+    // },
     nextPage: function () {
       return this.current + 1;
     },

@@ -1,6 +1,6 @@
 import client from "./http-client";
 
-const endpoint = 'system-logs';
+const endpoint = 'systemlogs';
 export const getDataSystemData = (params, callback, err) => {
     client.get(endpoint, {params})
     .then(res => {
