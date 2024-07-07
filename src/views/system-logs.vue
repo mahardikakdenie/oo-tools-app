@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<DataTable
-			isLoading
+			:isLoading="isLoading"
 			:headers="headers"
 			:datas="systemLogs"
 			:title="$route?.name.replace('', '')"
@@ -9,7 +9,15 @@
 			:limit="limit"
 			@on-select="onSelect"
 			@change-limit="onChangeLimit"
-			@search-type="onSearchType" />
+			@search-type="onSearchType"
+            @open-modal="openModal"
+        />
+        <modal-filter 
+            :show="isModalFilterVisible" 
+            title="Filter Logs"
+            @close="isModalFilterVisible = false"
+            @set-filter="onSetFilter"
+        />
 	</div>
 </template>
 
@@ -17,8 +25,11 @@
 import { computed, onMounted, ref } from 'vue';
 import DataTable from '@/components/DataTable/index.vue';
 import { getDataSystemData } from '@/lib/system-logs.js';
+import pageLoader from '@/components/Loader/pageLoader.vue';
+import ModalFilter from '@/components/Modal/Filter.vue';
 
 const systemLogs = ref([]);
+const isLoading = ref(false);
 
 const headers = [
 	{
@@ -77,7 +88,10 @@ const fetchParams = computed(() => {
 
 const getData = () => {
 	const params = fetchParams?.value;
+    isLoading.value = true;
+    systemLogs.value = [];
 	const callback = (res) => {
+        isLoading.value = false;
 		totalPages.value = res?.data?.data?.totalPages;
 		systemLogs.value = res?.data?.data?.data ?? [];
 	};
@@ -88,6 +102,7 @@ const getData = () => {
 
 const onSearchType = (value) => {
 	selectTypes.value = value.trim();
+    isLoading.value = true;
 	debounceGetData();
 };
 
@@ -104,6 +119,20 @@ const debounce = (func, delay) => {
 const debounceGetData = debounce(() => {
 	getData();
 }, 3000);
+
+const onSetFilter = (payload) => {
+    console.log("🚀 ~ onSetFilter ~ payload:", payload)
+    selectTypes.value = payload.type;
+    selectStatus.value = payload.status;
+    isModalFilterVisible.value = false;
+
+    getData();
+};
+
+const isModalFilterVisible = ref(false);
+const openModal = () => {
+    isModalFilterVisible.value = true;
+};
 
 onMounted(() => {
 	getData();

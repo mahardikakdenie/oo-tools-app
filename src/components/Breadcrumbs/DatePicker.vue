@@ -26,7 +26,7 @@ const dateValue = ref({
 });
 const dateValue2 = ref('');
 
-const weeklyDate = computed(() => dateValue?.value?.startDate && dateValue?.value?.endDate ? getWeeklyDate(dateValue) : 'Weakly');
+const weeklyDate = computed(() => dateValue?.value?.startDate && dateValue?.value?.endDate ? getWeeklyDate(dateValue) : 'Date Picker');
 const getWeeklyDate = (date) => {
     const start = new Date(date?.value?.startDate);
     const end = new Date(date?.value?.endDate);

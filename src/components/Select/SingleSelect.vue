@@ -3,9 +3,9 @@
         <select
             v-model="value"
             id="selectOption" 
-            class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:border-blue-500"
+            class="block appearance-none w-full bg-white border border-[#E2E8F0] px-4 py-2 rounded shadow leading-tight focus:outline-none focus:border-blue-500"
         >
-            <option disabled value="">{{ placeholder }}</option>
+            <option disabled value="" class="font-normal">{{ placeholder }}</option>
             <option v-for="(option , i) in options" :key="i" :value="option?.key">{{option.label}}</option>
         </select>
     </div>

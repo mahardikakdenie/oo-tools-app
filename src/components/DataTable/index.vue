@@ -12,12 +12,20 @@
 					prependIcon="heroicons-outline:search"
 					merged />
 			</div>
-			<div class="flex my-4 gap-2">
-				<div class="w-1/5">
-					<field-input placeholder="Search Type" @input="$emit('search-type', $event?.target?.value)" />
+			<div class="flex my-4 gap-2 justify-end">
+				<!-- <div class="w-1/5">
+					<field-input
+						placeholder="Search Type"
+						@change="$emit('search-type', $event?.target?.value)" />
 				</div>
 				<div class="w-1/5">
-					<SingleSelect placeholder="Status Logs" :options="systemLogStatuses" @change="onChanges($event, 'status')" />
+					<SingleSelect
+						placeholder="Status Logs"
+						:options="systemLogStatuses"
+						@change="onChanges($event, 'status')" />
+				</div> -->
+				<div class="flex items-center">
+					<vue-button text="Filter" btn-class="btn btn-sm btn-primary" @click="$emit('open-modal')" />
 				</div>
 			</div>
 			<vue-good-table
@@ -66,10 +74,12 @@
 					</span>
 					<span v-if="props.column.field === 'created_at'">
 						<span>
-							{{  setDate(props.row.created_at)  }}
+							{{ setDate(props.row.created_at) }}
 						</span>
 					</span>
-					<span v-if="props.column.field === 'type'" class="lowercase">
+					<span
+						v-if="props.column.field === 'type'"
+						class="lowercase">
 						{{ props.row.type }}
 					</span>
 				</template>
@@ -85,11 +95,17 @@
 							:totalPages="totalPage"
 							enableSearch
 							enableSelect
-							:options="options" 
+							:options="options"
 							@page-changed="current = $event"
 							@change-limit="changeLimit">
 							>
 						</Pagination>
+					</div>
+				</template>
+				<template #emptystate>
+					<PageLoader v-if="isLoading" />
+					<div v-else-if="datas.length <= 0 && !isLoading">
+						<span>No data table</span>
 					</div>
 				</template>
 			</vue-good-table>
@@ -110,6 +126,7 @@ import VueSelect from '@/components/Select/index.vue';
 import dayjs from 'dayjs';
 import { systemLogStatuses, types } from '@/constant/system-logs';
 import FieldInput from '@/components/Textinput';
+import PageLoader from '@/components/Loader/pageLoader.vue';
 const actions = [
 	{
 		name: 'view',
@@ -195,6 +212,7 @@ export default {
 		VueSelect,
 		SingleSelect,
 		FieldInput,
+		PageLoader,
 	},
 
 	props: {
@@ -217,7 +235,11 @@ export default {
 		limit: {
 			type: Number,
 			default: 10,
-		}
+		},
+		isLoading: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	data() {
@@ -238,7 +260,7 @@ export default {
 	},
 	methods: {
 		setDate(date) {
-			return dayjs(date).format('dddd, YYYY MMMM DD : hh:mm:ss')
+			return dayjs(date).format('dddd, YYYY MMMM DD : hh:mm:ss');
 		},
 		onChanges(value, type) {
 			this.$emit('on-select', value?.target?.value, type);
@@ -246,7 +268,7 @@ export default {
 		changeLimit(limit) {
 			this.$emit('change-limit', limit);
 		},
-	}
+	},
 };
 </script>
 <style lang="scss"></style>
