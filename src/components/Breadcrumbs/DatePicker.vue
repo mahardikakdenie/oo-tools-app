@@ -18,13 +18,19 @@
 
 <script setup>
 import { computed, ref } from "vue";
+import { useRoute, useRouter } from 'vue-router';
 import VueTailwindDatePicker from "vue-tailwind-datepicker";
+import dayjs from 'dayjs';
 import Icon from '@/components/Icon'
 const dateValue = ref({
     startDate: '',
     endDate: '',
 });
 const dateValue2 = ref('');
+const DATE_FORMAT = 'YYYY-MM-DD';
+
+const router = useRouter();
+const route = useRoute();
 
 const weeklyDate = computed(() => dateValue?.value?.startDate && dateValue?.value?.endDate ? getWeeklyDate(dateValue) : 'Date Picker');
 const getWeeklyDate = (date) => {
@@ -36,6 +42,7 @@ const getWeeklyDate = (date) => {
     if (start && end) {
         const startTimestamp = start;
         const endTimestamp = end;
+        router.push({ query: { ...route.query, since: setFormatDate(start, DATE_FORMAT), until: setFormatDate(end, DATE_FORMAT) } })
         const oneDay = 24 * 60 * 60 * 1000; // One day in milliseconds
         const diffTime = endTimestamp - startTimestamp;
         const diffDays = Math.ceil(diffTime / oneDay); 
@@ -60,6 +67,10 @@ const getWeeklyDate = (date) => {
         return 'Date Range Not Available';
     }
 }
+
+const setFormatDate = (date, format) => {
+    return dayjs(date).format(format);
+};
 
 const formatDateString = (timestamp) => {
     const date = new Date(timestamp);

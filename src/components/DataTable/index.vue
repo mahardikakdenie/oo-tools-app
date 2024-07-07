@@ -13,19 +13,8 @@
 					merged />
 			</div>
 			<div class="flex my-4 gap-2 justify-end">
-				<!-- <div class="w-1/5">
-					<field-input
-						placeholder="Search Type"
-						@change="$emit('search-type', $event?.target?.value)" />
-				</div>
-				<div class="w-1/5">
-					<SingleSelect
-						placeholder="Status Logs"
-						:options="systemLogStatuses"
-						@change="onChanges($event, 'status')" />
-				</div> -->
 				<div class="flex items-center">
-					<vue-button text="Filter" btn-class="btn btn-sm btn-primary" @click="$emit('open-modal')" />
+					<vue-button text="Filter" btn-class="btn btn-sm btn-primary dark:bg-slate-700" @click="$emit('open-modal')" />
 				</div>
 			</div>
 			<vue-good-table
@@ -79,15 +68,17 @@
 					</span>
 					<span
 						v-if="props.column.field === 'type'"
-						class="lowercase">
-						{{ props.row.type }}
+						class="lowercase hover:text-primary-400 cursor-pointer"
+						@click="$emit('open-detail', props?.row)"
+					>
+						{{ props?.row?.type }}
 					</span>
 				</template>
 				<template #pagination-bottom="props">
 					<div class="py-4 px-3">
 						<Pagination
 							:total="totalPage"
-							:current="current"
+							:current="currentPage"
 							:per-page="limit"
 							:pageRange="pageRange"
 							:pageChanged="props.pageChanged"
@@ -96,7 +87,7 @@
 							enableSearch
 							enableSelect
 							:options="options"
-							@page-changed="current = $event"
+							@page-changed="$emit('change-page', $event)"
 							@change-limit="changeLimit">
 							>
 						</Pagination>
@@ -240,6 +231,10 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		currentPage: {
+			type: Number,
+			default: 1,
+		}
 	},
 
 	data() {
