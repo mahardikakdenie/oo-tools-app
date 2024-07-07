@@ -14,8 +14,9 @@
         class="flex-none text-slate-600 dark:text-white text-sm font-normal items-center lg:flex hidden overflow-hidden text-ellipsis whitespace-nowrap"
       >
         <span
+          v-if="user"
           class="overflow-hidden text-ellipsis whitespace-nowrap w-[85px] block"
-          >Albert Flores</span
+          >{{ user?.username }}</span
         >
         <span class="text-base inline-block ltr:ml-[10px] rtl:mr-[10px]"
           ><Icon icon="heroicons-outline:chevron-down"></Icon
@@ -49,7 +50,8 @@
 import { MenuItem } from "@headlessui/vue";
 import Dropdown from "@/components/Dropdown";
 import Icon from "@/components/Icon";
-import profileImg from "@/assets/images/all-img/user.png"
+import profileImg from "@/assets/images/all-img/user.png";
+import { getMe } from '@/lib/auth';
 export default {
   components: {
     Icon,
@@ -60,65 +62,78 @@ export default {
     return {
       profileImg,
       ProfileMenu: [
-        {
-          label: "Profile",
-          icon: "heroicons-outline:user",
-          link: () => {
-            this.$router.push("profile");
-          },
-        },
-        {
-          label: "Chat",
-          icon: "heroicons-outline:chat",
-          link: () => {
-            this.$router.push("chat");
-          },
-        },
-        {
-          label: "Email",
-          icon: "heroicons-outline:mail",
-          link: () => {
-            this.$router.push("email");
-          },
-        },
-        {
-          label: "Todo",
-          icon: "heroicons-outline:clipboard-check",
-          link: () => {
-            this.$router.push("todo");
-          },
-        },
-        {
-          label: "Settings",
-          icon: "heroicons-outline:cog",
-          link: () => {
-            this.$router.push("settings");
-          },
-        },
-        {
-          label: "Price",
-          icon: "heroicons-outline:credit-card",
-          link: () => {
-            this.$router.push("pricing");
-          },
-        },
-        {
-          label: "Faq",
-          icon: "heroicons-outline:information-circle",
-          link: () => {
-            this.$router.push("faq");
-          },
-        },
+        // {
+        //   label: "Profile",
+        //   icon: "heroicons-outline:user",
+        //   link: () => {
+        //     this.$router.push("profile");
+        //   },
+        // },
+        // {
+        //   label: "Chat",
+        //   icon: "heroicons-outline:chat",
+        //   link: () => {
+        //     this.$router.push("chat");
+        //   },
+        // },
+        // {
+        //   label: "Email",
+        //   icon: "heroicons-outline:mail",
+        //   link: () => {
+        //     this.$router.push("email");
+        //   },
+        // },
+        // {
+        //   label: "Todo",
+        //   icon: "heroicons-outline:clipboard-check",
+        //   link: () => {
+        //     this.$router.push("todo");
+        //   },
+        // },
+        // {
+        //   label: "Settings",
+        //   icon: "heroicons-outline:cog",
+        //   link: () => {
+        //     this.$router.push("settings");
+        //   },
+        // },
+        // {
+        //   label: "Price",
+        //   icon: "heroicons-outline:credit-card",
+        //   link: () => {
+        //     this.$router.push("pricing");
+        //   },
+        // },
+        // {
+        //   label: "Faq",
+        //   icon: "heroicons-outline:information-circle",
+        //   link: () => {
+        //     this.$router.push("faq");
+        //   },
+        // },
         {
           label: "Logout",
           icon: "heroicons-outline:login",
           link: () => {
-            this.$router.push("/");
-            localStorage.removeItem("activeUser");
+            // localStorage.removeItem("token");
+            // this.$router.push("/login");
           },
         },
       ],
+      user: null,
     };
+  },
+  created() {
+    this.getUserMe();
+  },
+  methods: {
+    getUserMe() {
+      const params = {};
+      const callback = (res) => {
+        this.user = res?.data?.data;
+      }; 
+      getMe(params, callback);
+    },
   },
 };
 </script>

@@ -41,7 +41,7 @@
 							!this.$store.themeSettingsStore.isDark &&
 							!this.$store.themeSettingsStore.semidark
 						" />
-					<img
+					<imggi
 						src="/logo/logo-oo.svg"
 						alt=""
 						v-if="

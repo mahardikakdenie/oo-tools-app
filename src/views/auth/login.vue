@@ -76,7 +76,8 @@ const submit = () => {
         console.log(res);
         if (res?.data?.meta?.status) {
             localStorage.setItem('token', res?.data?.data);
-            router?.push('/system-log');
+            // router?.push('/system-log');
+			window.location.href = '/system-log';
         }
     } 
     
