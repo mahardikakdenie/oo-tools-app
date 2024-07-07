@@ -35,14 +35,14 @@
 					:to="{ name: 'home' }"
 					v-if="isSidebarCollapsedAndNotHovered">
 					<img
-						src="@/assets/images/logo/logo-c.svg"
+						src="/logo/logo-oo.svg"
 						alt=""
 						v-if="
 							!this.$store.themeSettingsStore.isDark &&
 							!this.$store.themeSettingsStore.semidark
 						" />
 					<img
-						src="@/assets/images/logo/logo-c-white.svg"
+						src="/logo/logo-oo.svg"
 						alt=""
 						v-if="
 							this.$store.themeSettingsStore.isDark ||
