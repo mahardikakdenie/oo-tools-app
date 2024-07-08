@@ -10,6 +10,10 @@ export const systemLogStatuses = [
     {
         label: 'Info',
         key: 'info',
+    },
+    {
+        label: 'Pending',
+        key: 'pending',
     }
 ];
 
