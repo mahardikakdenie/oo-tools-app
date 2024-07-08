@@ -11,9 +11,7 @@
 			</div>
 			<div class="max-w-2xl mx-auto bg-gray-100 p-6 rounded-lg shadow-md">
 				<h2 class="text-xl font-semibold mb-4">Data</h2>
-				<pre class="bg-gray-900 text-sm text-white p-4 rounded-lg overflow-auto">
-					{{ JSON.stringify({ data: data?.data } , null, 2).trim() }}
-				</pre>
+				<pre class="bg-gray-900 text-sm text-white p-4 rounded-lg overflow-auto">{{ JSON.stringify({ data: data?.data } , null, 2).trim() }}</pre>
 			</div>
 		</div>
 		<template #footer>
