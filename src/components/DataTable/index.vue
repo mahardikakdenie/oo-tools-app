@@ -54,7 +54,7 @@
 									? 'text-success-500 bg-success-500'
 									: ''
 							} 
-			${props.row.status === 'failed' ? 'text-warning-500 bg-warning-500' : ''}
+			${props.row.status === 'failed' || props.row.status === 'pending' ? 'text-warning-500 bg-warning-500' : ''}
 			${props.row.status === 'info' ? 'text-primary-500 bg-primary-500' : ''}
 			
 			`">

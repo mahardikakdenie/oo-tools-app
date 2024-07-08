@@ -71,6 +71,7 @@ watch(
 		if (query?.since || queryUntil) {
 			since.value = query?.since;
 			until.value = query?.until;
+			currentPage.value = 1;
 
 			getData();
 		}
