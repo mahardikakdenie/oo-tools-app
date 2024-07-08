@@ -171,6 +171,7 @@ const onSetFilter = (payload) => {
 	selectTypes.value = payload.type;
 	selectStatus.value = payload.status;
 	isModalFilterVisible.value = false;
+	currentPage.value = 1;
 
 	getData();
 };
