@@ -191,6 +191,6 @@ const onOpenDetail = (data) => {
 
 onMounted(() => {
 	getQueryFilter();
-	getData();
+	// getData();
 });
 </script>
