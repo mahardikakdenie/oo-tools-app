@@ -7,7 +7,7 @@
 			</div>
 			<div class="mb-4">
 				<span class="block text-gray-600 font-medium">Status:</span>
-				<span class="block text-red-500">{{ data?.status }}</span>
+				<span class="block text-gray-600">{{ data?.status }}</span>
 			</div>
 			<div class="max-w-2xl mx-auto bg-gray-100 p-6 rounded-lg shadow-md">
 				<h2 class="text-xl font-semibold mb-4">Data</h2>

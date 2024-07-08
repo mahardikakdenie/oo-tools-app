@@ -77,6 +77,7 @@
 				<template #pagination-bottom="props">
 					<div class="py-4 px-3">
 						<Pagination
+							v-if="!isLoading"
 							:total="totalPage"
 							:current="currentPage"
 							:per-page="limit"
