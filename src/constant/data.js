@@ -13,16 +13,16 @@ export const menuItems = [
     icon: "tdesign:backup",
     link: "system-log",
   },
-  {
-    title: "Exchange Resi",
-    icon: "basil:exchange-solid",
-    link: "exchange-receipt-number",
-  },
-  {
-    title: "Submission",
-    icon: "fluent-mdl2:activate-orders",
-    link: "submission",
-  },
+  // {
+  //   title: "Exchange Resi",
+  //   icon: "basil:exchange-solid",
+  //   link: "exchange-receipt-number",
+  // },
+  // {
+  //   title: "Submission",
+  //   icon: "fluent-mdl2:activate-orders",
+  //   link: "submission",
+  // },
 ];
 // menuseetins
 

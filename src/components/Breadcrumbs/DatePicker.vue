@@ -50,13 +50,14 @@ const getWeeklyDate = (date) => {
 
             if (diffDays === 0) {
                 return 'Today';
-            } else if (diffDays === -1) {
-                return 'Tomorrow';
-            } else if (diffDays === 1) {
-                return 'Yesterday';
-            } else {
-                return 'wow';
-            }
+            } 
+            // else if (diffDays === -1) {
+            //     return 'Tomorrow';
+            // } else if (diffDays === 1) {
+            //     return 'Yesterday';
+            // } else {
+            //     return 'wow';
+            // }
         } else {
             // If the difference is greater than 0, it's a range
             return `From ${formatDateString(startTimestamp)} to ${formatDateString(endTimestamp)}`;
