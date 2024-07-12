@@ -7,18 +7,18 @@
 			:sectionName="sectionName"
 		/>
 	</div>
-	<date-picker-section />
+	<!-- <date-picker-section /> -->
 </div>
 </template>
 <script>
 import Icon from "@/components/Icon";
 import Group from "@/components/Breadcrumbs/Group.vue";
-import DatePickerSection from '@/components/Breadcrumbs/DatePicker.vue'
+// import DatePickerSection from '@/components/Breadcrumbs/DatePicker.vue'
 export default {
     components: {
         Icon,
         Group,
-		DatePickerSection,
+		// DatePickerSection,
     },
     computed: {
         sectionName() {

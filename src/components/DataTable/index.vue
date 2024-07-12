@@ -24,7 +24,7 @@
 					<multiselect :options="systemLogStatuses" class="w-[200px]" @input="onChanges($event, 'status')" />
 				</div>
 				<div class="flex items-center">
-					<!-- <vue-button text="Filter" btn-class="btn btn-sm btn-primary dark:bg-slate-700" @click="$emit('open-modal')" /> -->
+					<DatePicker />
 				</div>
 			</div>
 			<vue-good-table
@@ -129,7 +129,8 @@ import dayjs from 'dayjs';
 import { systemLogStatuses, types } from '@/constant/system-logs';
 import FieldInput from '@/components/Textinput';
 import PageLoader from '@/components/Loader/pageLoader.vue';
-import Multiselect from '@/components/Select/index.vue'
+import Multiselect from '@/components/Select/index.vue';
+import DatePicker from '@/components/Breadcrumbs/DatePicker.vue';
 const actions = [
 	{
 		name: 'view',
@@ -217,6 +218,7 @@ export default {
 		FieldInput,
 		PageLoader,
 		Multiselect,
+		DatePicker,
 	},
 
 	props: {

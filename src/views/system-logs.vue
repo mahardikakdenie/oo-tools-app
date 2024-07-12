@@ -158,7 +158,6 @@ const onSearchType = (value) => {
 		isLoading.value = true;
 		currentPage.value = 1;
 		selectStatus.value = selectStatus.value || 'success';
-		console.log("🚀 ~ timeout.value=setTimeout ~ selectStatus.value:", selectStatus.value)
 		since.value = querySince.value ?? dayjs().subtract(1, 'month').format('YYYY-MM-DD');
 		until.value = queryUntil.value ?? dayjs().format('YYYY-MM-DD');
 		getData();

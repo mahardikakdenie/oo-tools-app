@@ -37,7 +37,6 @@ const getWeeklyDate = (date) => {
     const start = new Date(date?.value?.startDate);
     const end = new Date(date?.value?.endDate);
     const currentTimestamp = new Date();
-    console.log("🚀 ~ file: DatePicker.vue:54 ~ getWeeklyDate ~ currentTimestamp:", currentTimestamp)
 
     if (start && end) {
         const startTimestamp = start;
@@ -46,7 +45,6 @@ const getWeeklyDate = (date) => {
         const oneDay = 24 * 60 * 60 * 1000; // One day in milliseconds
         const diffTime = endTimestamp - startTimestamp;
         const diffDays = Math.ceil(diffTime / oneDay); 
-        console.log("🚀 ~ file: DatePicker.vue:62 ~ getWeeklyDate ~ diffDays:", diffDays)
 
         if (Math.abs(diffDays) === 1 || diffDays === 0) {
 
