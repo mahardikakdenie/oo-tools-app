@@ -12,9 +12,19 @@
 					prependIcon="heroicons-outline:search"
 					merged />
 			</div>
-			<div class="flex my-4 gap-2 justify-end">
+			<div class="flex my-4 gap-2 justify-between">
+				<div class="mb-2 flex gap-2">
+					<InputGroup
+						placeholder="Search"
+						type="text"
+						prependIcon="heroicons-outline:search"
+						merged
+						@keyup="onSearch"
+					/>
+					<multiselect :options="systemLogStatuses" class="w-[200px]" @input="onChanges($event, 'status')" />
+				</div>
 				<div class="flex items-center">
-					<vue-button text="Filter" btn-class="btn btn-sm btn-primary dark:bg-slate-700" @click="$emit('open-modal')" />
+					<!-- <vue-button text="Filter" btn-class="btn btn-sm btn-primary dark:bg-slate-700" @click="$emit('open-modal')" /> -->
 				</div>
 			</div>
 			<vue-good-table
@@ -119,6 +129,7 @@ import dayjs from 'dayjs';
 import { systemLogStatuses, types } from '@/constant/system-logs';
 import FieldInput from '@/components/Textinput';
 import PageLoader from '@/components/Loader/pageLoader.vue';
+import Multiselect from '@/components/Select/index.vue'
 const actions = [
 	{
 		name: 'view',
@@ -205,6 +216,7 @@ export default {
 		SingleSelect,
 		FieldInput,
 		PageLoader,
+		Multiselect,
 	},
 
 	props: {
@@ -222,7 +234,7 @@ export default {
 		},
 		totalPage: {
 			type: Number,
-			default: 10,
+			default: 1,
 		},
 		limit: {
 			type: Number,
@@ -243,7 +255,7 @@ export default {
 			advancedTable,
 			current: 1,
 			perpage: 10,
-			pageRange: 5,
+			pageRange: 1,
 			searchTerm: '',
 			actions,
 			options,
@@ -260,6 +272,10 @@ export default {
 		},
 		onChanges(value, type) {
 			this.$emit('on-select', value?.target?.value, type);
+		},
+		onSearch(target) {
+			const keyword = target?.target?.value;
+			this.$emit('search', keyword);
 		},
 		changeLimit(limit) {
 			this.$emit('change-limit', limit);

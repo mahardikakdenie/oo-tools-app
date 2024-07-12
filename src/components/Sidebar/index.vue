@@ -41,13 +41,14 @@
 							!this.$store.themeSettingsStore.isDark &&
 							!this.$store.themeSettingsStore.semidark
 						" />
-					<imggi
+					<img
 						src="/logo/logo-oo.svg"
 						alt=""
 						v-if="
 							this.$store.themeSettingsStore.isDark ||
 							this.$store.themeSettingsStore.semidark
-						" />
+						" 
+					/>
 				</router-link>
 				<span
 					class="cursor-pointer text-slate-900 dark:text-white text-2xl"

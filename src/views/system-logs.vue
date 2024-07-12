@@ -14,6 +14,7 @@
 			@search-type="onSearchType"
 			@open-modal="openModal"
             @open-detail="onOpenDetail"
+			@search="onSearchType"
         />
 		<modal-filter
 			:show="isModalFilterVisible"
@@ -33,6 +34,7 @@ import { getDataSystemData } from '@/lib/system-logs.js';
 import { useRoute } from 'vue-router';
 import pageLoader from '@/components/Loader/pageLoader.vue';
 import ModalFilter from '@/components/Modal/Filter.vue';
+import dayjs from 'dayjs';
 import ModalDetail from '@/components/Modal/LogDetail.vue';
 
 const route = useRoute();
@@ -61,7 +63,7 @@ const headers = [
 const selectTypes = ref('');
 const selectStatus = ref('');
 const limit = ref(5);
-const totalPages = ref(10);
+const totalPages = ref(1);
 const since = ref(null);
 const until = ref(null);
 
@@ -93,12 +95,12 @@ const onChangeLimit = (limitValue) => {
 };
 
 const onSelect = (value, type) => {
-    if (type === 'status') {
-        selectStatus.value = value;
+    if (type === 'status' && selectTypes.value) {
+        selectStatus.value = value.toLowerCase();
+		currentPage.value = 1;
+		getData();
 	}
     
-    currentPage.value = 1;
-	getData();
 };
 
 const currentPage = ref(1);
@@ -146,11 +148,21 @@ const getData = () => {
 	getDataSystemData(params, callback, err);
 };
 
+let timeout = ref(null);
 const onSearchType = (value) => {
-	selectTypes.value = value.trim();
-	isLoading.value = true;
-    currentPage.value = 1;
-	debounceGetData();
+	selectTypes.value = null;
+	if (!value || value === null || value === '') return;
+	if (timeout.value) clearTimeout(timeout.value);
+	timeout.value = setTimeout(() => {
+		selectTypes.value = value.trim();
+		isLoading.value = true;
+		currentPage.value = 1;
+		selectStatus.value = selectStatus.value || 'success';
+		console.log("🚀 ~ timeout.value=setTimeout ~ selectStatus.value:", selectStatus.value)
+		since.value = querySince.value ?? dayjs().subtract(1, 'month').format('YYYY-MM-DD');
+		until.value = queryUntil.value ?? dayjs().format('YYYY-MM-DD');
+		getData();
+	}, 3000);
 };
 
 const debounce = (func, delay) => {
@@ -172,7 +184,8 @@ const onSetFilter = (payload) => {
 	selectStatus.value = payload.status;
 	isModalFilterVisible.value = false;
 	currentPage.value = 1;
-
+	since.value = querySince.value ?? dayjs().subtract(1, 'month').format('YYYY-MM-DD');
+	until.value = queryUntil.value ?? dayjs().format('YYYY-DD-MM');
 	getData();
 };
 
