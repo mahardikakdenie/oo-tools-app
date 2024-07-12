@@ -150,8 +150,6 @@ const getData = () => {
 
 let timeout = ref(null);
 const onSearchType = (value) => {
-	selectTypes.value = null;
-	if (!value || value === null || value === '') return;
 	if (timeout.value) clearTimeout(timeout.value);
 	timeout.value = setTimeout(() => {
 		selectTypes.value = value.trim();
